@@ -1,0 +1,10 @@
+
+-- table name is car (Comments)
+	
+	SELECT cm.manufacturer, cm.model, cm.price from 
+	(SELECT manufacturer, model, price, 
+		ROW_NUMBER() OVER(partition by manufacturer order by price desc) 
+			first_row from car) as cm 
+	where cm.first_row = 1;
+	
+	
